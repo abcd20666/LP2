@@ -1,0 +1,248 @@
+⭐ STUDENT RESULT MANAGEMENT SYSTEM (FINAL STEP-BY-STEP)
+🔷 STEP 1: Create Student Object
+
+Go to:
+
+Setup → Object Manager → Create → Custom Object
+Object:
+Label: Student
+API Name: Student__c
+Fields:
+Student Name (default Name)
+Roll Number (Number)
+Department (Picklist/Text)
+Year (Picklist)
+Email (Email)
+
+✔ Save
+
+🔷 STEP 2: Create Result Object
+
+Create:
+
+Label: Result
+API Name: Result__c
+Fields:
+⭐ Lookup Relationship
+Student → Lookup(Student__c)
+⭐ Marks Fields
+DSBDA Marks (Number)
+WT Marks (Number)
+AI Marks (Number)
+CC Marks (Number)
+⭐ Calculation Fields
+Total (Number)
+Percentage (Percent)
+Grade (Text)
+Result Status (Text)
+
+✔ Save
+
+🔷 STEP 3: Create Tabs
+
+Go to:
+
+Setup → Tabs
+
+Create:
+
+Student Tab
+Result Tab
+
+✔ Save
+
+🔷 STEP 4: Create Lightning App
+
+Go to:
+
+Setup → App Manager → New Lightning App
+App Name:
+
+Student Result Management System
+
+Add Tabs:
+Students
+Results
+Reports (optional)
+
+✔ Save
+
+🔷 STEP 5: Create Apex Class (Logic)
+
+Go to:
+
+Developer Console → New Apex Class
+Class Name:
+
+ResultController
+
+Code:
+public class ResultController {
+
+    public static void calculate(List<Result__c> results) {
+
+        for(Result__c r : results) {
+
+            Decimal total =
+                (r.DSBDA__c == null ? 0 : r.DSBDA__c) +
+                (r.WT__c == null ? 0 : r.WT__c) +
+                (r.AI__c == null ? 0 : r.AI__c) +
+                (r.CC__c == null ? 0 : r.CC__c);
+
+            Decimal percentage = total / 4;
+
+            String grade;
+            String status;
+
+            if(percentage >= 75) {
+                grade = 'A';
+                status = 'Pass';
+            }
+            else if(percentage >= 60) {
+                grade = 'B';
+                status = 'Pass';
+            }
+            else if(percentage >= 50) {
+                grade = 'C';
+                status = 'Pass';
+            }
+            else if(percentage >= 35) {
+                grade = 'D';
+                status = 'Pass';
+            }
+            else {
+                grade = 'Fail';
+                status = 'Fail';
+            }
+
+            r.Total__c = total;
+            r.Percentage__c = percentage;
+            r.Grade__c = grade;
+            r.Result_Status__c = status;
+        }
+    }
+}
+
+✔ Save
+
+🔷 STEP 6: Create Trigger
+
+Go to:
+
+Developer Console → New Trigger
+Trigger Name:
+
+ResultTrigger
+
+Object:
+
+Result__c
+
+Code:
+trigger ResultTrigger on Result__c (before insert, before update) {
+
+    ResultController.calculate(Trigger.new);
+}
+
+✔ Save
+
+🔷 STEP 7: Enter Student Data
+
+Go to:
+👉 Students Tab → New
+
+Fill:
+
+Name
+Roll Number
+Department
+Year
+Email
+
+✔ Save
+
+🔷 STEP 8: Enter Result Data
+
+Go to:
+👉 Results Tab → New
+
+Fill:
+
+Student (Lookup)
+DSBDA Marks
+WT Marks
+AI Marks
+CC Marks
+
+✔ Save
+
+🔷 STEP 9: Automatic Calculation Happens
+
+When you click SAVE:
+
+✔ Total
+
+80+70+90+85=325
+
+✔ Percentage
+
+4
+325
+	​
+
+=81.25%
+
+✔ Grade Logic
+Percentage	Grade
+75+	A
+60–74	B
+50–59	C
+35–49	D
+<35	Fail
+🔷 STEP 10: Reports
+
+Go to:
+
+App Launcher → Reports
+
+Create Report:
+
+Object: Result__c
+Add fields:
+Student Name
+Marks
+Total
+Percentage
+Grade
+Status
+
+✔ Save & Run
+
+⭐ FINAL FLOW (VERY IMPORTANT FOR VIVA)
+1. Create Student
+        ↓
+2. Enter Result Marks
+        ↓
+3. Click Save
+        ↓
+4. Trigger runs automatically
+        ↓
+5. Apex calculates:
+   - Total
+   - Percentage
+   - Grade
+   - Status
+        ↓
+6. Data stored in Salesforce
+        ↓
+7. Report generated
+⭐ WHAT YOU BUILT
+
+✔ Objects
+✔ Fields
+✔ Tabs
+✔ App
+✔ Apex Class
+✔ Trigger
+✔ Automatic Calculation
+✔ Reports
