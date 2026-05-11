@@ -1,0 +1,506 @@
+import java.util.*;
+
+class SelectionSort {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of elements:");
+
+        int n = sc.nextInt();
+
+        int a[] = new int[n];
+
+        System.out.println("Enter elements:");
+
+        for (int i = 0; i < n; i++) {
+
+            a[i] = sc.nextInt();
+        }
+
+        // Print original array
+        System.out.println("\nOriginal Array:");
+
+        for (int x : a) {
+
+            System.out.print(x + " ");
+        }
+
+        // Selection Sort
+        for (int i = 0; i < n - 1; i++) {
+
+            int min = i;
+
+            for (int j = i + 1; j < n; j++) {
+
+                if (a[j] < a[min]) {
+
+                    min = j;
+                }
+            }
+
+            // Swap
+            int temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+
+            // Print each iteration
+            System.out.println("\n\nIteration " + (i + 1) + ":");
+
+            for (int k = 0; k < n; k++) {
+
+                System.out.print(a[k] + " ");
+            }
+        }
+
+        System.out.println("\n\nSorted Elements:");
+
+        for (int x : a) {
+
+            System.out.print(x + " ");
+        }
+
+        sc.close();
+    }
+}
+
+
+========================================================================================================================
+
+import java.util.*;
+
+class Prim {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of vertices:");
+        int n = sc.nextInt();
+
+        int g[][] = new int[n][n];
+
+        System.out.println("Enter adjacency matrix:");
+
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                g[i][j] = sc.nextInt();
+
+        boolean v[] = new boolean[n];
+
+        v[0] = true;
+
+        int cost = 0;
+
+        System.out.println("\nPrim MST:");
+
+        for(int e=0; e<n-1; e++) {
+
+            int min = 999, x = 0, y = 0;
+
+            for(int i=0;i<n;i++) {
+
+                if(v[i]) {
+
+                    for(int j=0;j<n;j++) {
+
+                        if(!v[j] && g[i][j]!=0 && g[i][j]<min) {
+
+                            min = g[i][j];
+                            x = i;
+                            y = j;
+                        }
+                    }
+                }
+            }
+
+            System.out.println(x + " - " + y + " : " + min);
+
+            cost += min;
+
+            v[y] = true;
+        }
+
+        System.out.println("Total Cost = " + cost);
+
+        sc.close();
+    }
+}
+
+
+Enter number of vertices:
+4
+
+Enter adjacency matrix:
+0 2 0 6
+2 0 3 8
+0 3 0 5
+6 8 5 0
+
+MST using Prim's Algorithm:
+0 - 1 : 2
+1 - 2 : 3
+2 - 3 : 5
+Total Cost = 10
+
+
+==============================================================================================================
+
+
+
+
+import java.util.*;
+
+class Kruskal {
+
+    static int find(int p[], int i) {
+
+        while(p[i] != i)
+            i = p[i];
+
+        return i;
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of vertices:");
+        int n = sc.nextInt();
+
+        int g[][] = new int[n][n];
+
+        System.out.println("Enter adjacency matrix:");
+
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                g[i][j] = sc.nextInt();
+
+        int p[] = new int[n];
+
+        for(int i=0;i<n;i++)
+            p[i] = i;
+
+        int cost = 0;
+
+        System.out.println("\nKruskal MST:");
+
+        for(int e=0; e<n-1; ) {
+
+            int min = 999, x = 0, y = 0;
+
+            for(int i=0;i<n;i++) {
+
+                for(int j=0;j<n;j++) {
+
+                    if(g[i][j]!=0 && g[i][j]<min) {
+
+                        min = g[i][j];
+                        x = i;
+                        y = j;
+                    }
+                }
+            }
+
+            int a = find(p,x);
+            int b = find(p,y);
+
+            if(a != b) {
+
+                System.out.println(x + " - " + y + " : " + min);
+
+                cost += min;
+
+                p[a] = b;
+
+                e++;
+            }
+
+            g[x][y] = g[y][x] = 999;
+        }
+
+        System.out.println("Total Cost = " + cost);
+
+        sc.close();
+    }
+}
+
+
+Enter number of vertices:
+4
+
+Enter adjacency matrix:
+0 2 0 6
+2 0 3 8
+0 3 0 5
+6 8 5 0
+
+MST using Prim's Algorithm:
+0 - 1 : 2
+1 - 2 : 3
+2 - 3 : 5
+Total Cost = 10
+
+=======================================================================================================================
+
+
+import java.util.*;
+
+class MST {
+
+    // Find function for Kruskal
+    static int find(int parent[], int i) {
+
+        while (parent[i] != i)
+            i = parent[i];
+
+        return i;
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of vertices:");
+        int n = sc.nextInt();
+
+        int graph[][] = new int[n][n];
+
+        System.out.println("Enter adjacency matrix:");
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                graph[i][j] = sc.nextInt();
+            }
+        }
+
+        // ================= PRIM =================
+
+        boolean visited[] = new boolean[n];
+
+        visited[0] = true;
+
+        int primCost = 0;
+
+        System.out.println("\nMST using Prim's Algorithm:");
+
+        for (int e = 0; e < n - 1; e++) {
+
+            int min = 999, x = 0, y = 0;
+
+            for (int i = 0; i < n; i++) {
+
+                if (visited[i]) {
+
+                    for (int j = 0; j < n; j++) {
+
+                        if (!visited[j] && graph[i][j] != 0
+                                && graph[i][j] < min) {
+
+                            min = graph[i][j];
+                            x = i;
+                            y = j;
+                        }
+                    }
+                }
+            }
+
+            System.out.println(x + " - " + y + " : " + min);
+
+            primCost += min;
+
+            visited[y] = true;
+        }
+
+        System.out.println("Total Cost = " + primCost);
+
+        // ================= KRUSKAL =================
+
+        int g[][] = new int[n][n];
+
+        // Copy graph
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                g[i][j] = graph[i][j];
+            }
+        }
+
+        int parent[] = new int[n];
+
+        for (int i = 0; i < n; i++)
+            parent[i] = i;
+
+        int kruskalCost = 0;
+
+        System.out.println("\nMST using Kruskal's Algorithm:");
+
+        for (int e = 0; e < n - 1;) {
+
+            int min = 999, x = 0, y = 0;
+
+            for (int i = 0; i < n; i++) {
+
+                for (int j = 0; j < n; j++) {
+
+                    if (g[i][j] != 0 && g[i][j] < min) {
+
+                        min = g[i][j];
+                        x = i;
+                        y = j;
+                    }
+                }
+            }
+
+            int a = find(parent, x);
+
+            int b = find(parent, y);
+
+            if (a != b) {
+
+                System.out.println(x + " - " + y + " : " + min);
+
+                kruskalCost += min;
+
+                parent[a] = b;
+
+                e++;
+            }
+
+            g[x][y] = g[y][x] = 999;
+        }
+
+        System.out.println("Total Cost = " + kruskalCost);
+
+        sc.close();
+    }
+}
+
+
+Enter number of vertices:
+4
+
+Enter adjacency matrix:
+0 2 0 6
+2 0 3 8
+0 3 0 5
+6 8 5 0
+
+MST using Prim's Algorithm:
+0 - 1 : 2
+1 - 2 : 3
+2 - 3 : 5
+Total Cost = 10
+
+============================================================================================================================
+
+
+import java.util.*;
+
+class Dijkstra {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter number of vertices:");
+
+        int n = sc.nextInt();
+
+        int g[][] = new int[n][n];
+
+        System.out.println("Enter adjacency matrix:");
+
+        for(int i=0;i<n;i++) {
+
+            for(int j=0;j<n;j++) {
+
+                g[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Enter source vertex:");
+
+        int src = sc.nextInt();
+
+        int dist[] = new int[n];
+
+        boolean visit[] = new boolean[n];
+
+        // Initialize
+        for(int i=0;i<n;i++) {
+
+            dist[i] = 999;
+        }
+
+        dist[src] = 0;
+
+        // Dijkstra Algorithm
+        for(int c=0;c<n-1;c++) {
+
+            int min = 999;
+            int u = -1;
+
+            // Find minimum distance vertex
+            for(int i=0;i<n;i++) {
+
+                if(!visit[i] && dist[i] < min) {
+
+                    min = dist[i];
+                    u = i;
+                }
+            }
+
+            visit[u] = true;
+
+            // Update distances
+            for(int v=0;v<n;v++) {
+
+                if(!visit[v] &&
+                   g[u][v] != 0 &&
+                   dist[u] + g[u][v] < dist[v]) {
+
+                    dist[v] = dist[u] + g[u][v];
+                }
+            }
+        }
+
+        System.out.println("\nShortest distances from source:");
+
+        for(int i=0;i<n;i++) {
+
+            System.out.println(src + " -> " + i + " = " + dist[i]);
+        }
+
+        sc.close();
+    }
+}
+
+
+Enter number of vertices:
+5
+
+Enter adjacency matrix:
+0 10 0 30 100
+10 0 50 0 0
+0 50 0 20 10
+30 0 20 0 60
+100 0 10 60 0
+
+Enter source vertex:
+0
+
+
+Shortest distances from source:
+0 -> 0 = 0
+0 -> 1 = 10
+0 -> 2 = 50
+0 -> 3 = 30
+0 -> 4 = 60
+
+
+
