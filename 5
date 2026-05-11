@@ -1,0 +1,252 @@
+import java.util.*;
+import java.util.Scanner;
+
+class AdmissionChatbot {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("======================================");
+        System.out.println("   WELCOME TO ADMISSION CHATBOT");
+        System.out.println("======================================");
+
+        System.out.print("Enter Your Name: ");
+        String name = sc.nextLine();
+
+        System.out.println("\nHello " + name + " !");
+        System.out.println("I am here to help you with college admission queries.");
+
+        while (true) {
+
+            System.out.println("\n--------------------------------------");
+            System.out.println("1. Courses");
+            System.out.println("2. Fees");
+            System.out.println("3. Admission");
+            System.out.println("4. Hostel");
+            System.out.println("5. Placement");
+            System.out.println("6. Scholarship");
+            System.out.println("7. Library");
+            System.out.println("8. Sports");
+            System.out.println("9. Faculty");
+            System.out.println("10. Canteen");
+            System.out.println("11. Contact");
+            System.out.println("12. Exit");
+            System.out.println("--------------------------------------");
+
+            System.out.print("\nAsk your query: ");
+
+            String q = sc.nextLine().toLowerCase();
+
+            if (q.contains("course") || q.equals("1")) {
+
+                System.out.println("\nAvailable Courses:");
+                System.out.println("-> CSE");
+                System.out.println("-> IT");
+                System.out.println("-> AIDS");
+                System.out.println("-> ECE");
+                System.out.println("-> Mechanical");
+            }
+
+            else if (q.contains("fees") || q.equals("2")) {
+
+                System.out.println("\nFees Structure:");
+                System.out.println("Rs.1,00,000 per year");
+            }
+
+            else if (q.contains("admission") || q.equals("3")) {
+
+                System.out.println("\nAdmission Process:");
+                System.out.println("Admission is based on entrance exam score.");
+            }
+
+            else if (q.contains("hostel") || q.equals("4")) {
+
+                System.out.println("\nHostel Facility:");
+                System.out.println("Separate hostel available for boys and girls.");
+            }
+
+            else if (q.contains("placement") || q.equals("5")) {
+
+                System.out.println("\nPlacement Information:");
+                System.out.println("Top companies visit every year.");
+                System.out.println("Average package: 5 LPA");
+            }
+
+            else if (q.contains("scholarship") || q.equals("6")) {
+
+                System.out.println("\nScholarship Details:");
+                System.out.println("Scholarships available for meritorious students.");
+            }
+
+            else if (q.contains("library") || q.equals("7")) {
+
+                System.out.println("\nLibrary Information:");
+                System.out.println("Digital and Central Library available.");
+            }
+
+            else if (q.contains("sports") || q.equals("8")) {
+
+                System.out.println("\nSports Facilities:");
+                System.out.println("Indoor and outdoor sports available.");
+            }
+
+            else if (q.contains("faculty") || q.equals("9")) {
+
+                System.out.println("\nFaculty Information:");
+                System.out.println("Experienced and highly qualified faculty members are available.");
+            }
+
+            else if (q.contains("canteen") || q.equals("10")) {
+
+                System.out.println("\nCanteen Information:");
+                System.out.println("Healthy and hygienic food is available in the college canteen.");
+            }
+
+            else if (q.contains("contact") || q.equals("11")) {
+
+                System.out.println("\nContact Details:");
+                System.out.println("Phone: 9876543210");
+                System.out.println("Email: admission@college.com");
+            }
+
+            else if (q.contains("hello") || q.contains("hi")) {
+
+                System.out.println("\nHello " + name + "! How can I help you?");
+            }
+
+            else if (q.contains("thank")) {
+
+                System.out.println("\nYou are welcome " + name + " !");
+            }
+
+            else if (q.contains("exit") || q.equals("12")) {
+
+                System.out.println("\nThank You " + name + " for visiting!");
+                break;
+            }
+
+            else {
+
+                System.out.println("\nSorry! I don't understand your query.");
+                System.out.println("Please select from the available options.");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
+
+
+
+import java.util.*;
+import java.util.Scanner;
+
+class AdmissionChatbot {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("=================================");
+        System.out.println(" Welcome to Admission Chatbot ");
+        System.out.println("=================================");
+
+        while (true) {
+
+            System.out.println("\nYou can ask about:");
+            System.out.println("Courses, Fees, Admission, Hostel,");
+            System.out.println("Placements, Faculty, Scholarship,");
+            System.out.println("Library, canteen , sports, Contact, Exit");
+
+            System.out.print("\nAsk Question: ");
+
+            String q = sc.nextLine();
+
+            q = q.toLowerCase();
+
+            if (q.contains("course")) {
+
+                System.out.println("Available courses are:");
+                System.out.println("CSE, IT, AIDS, ECE and Mechanical");
+            }
+
+            else if (q.contains("fees")) {
+
+                System.out.println("Fees is Rs.1,00,000 per year");
+            }
+
+            else if (q.contains("admission")) {
+
+                System.out.println("Admission is based on entrance exam score");
+            }
+
+            else if (q.contains("hostel")) {
+
+                System.out.println("Hostel facility is available for boys and girls");
+            }
+
+            else if (q.contains("placement")) {
+
+                System.out.println("Top companies visit for placements every year");
+            }
+
+            else if (q.contains("faculty")) {
+
+                System.out.println("Experienced and qualified faculty members are available");
+            }
+
+            else if (q.contains("scholarship")) {
+
+                System.out.println("Scholarships are available for meritorious students");
+            }
+
+            else if (q.contains("library")) {
+
+                System.out.println("Digital and central library facilities are available");
+            }
+
+            else if (q.contains("canteen")) {
+
+                System.out.println("College canteen provides healthy food");
+            }
+
+            else if (q.contains("sports")) {
+
+                System.out.println("Indoor and outdoor sports facilities are available");
+            }
+
+            else if (q.contains("contact")) {
+
+                System.out.println("Contact: 9876543210");
+                System.out.println("Email: admission@college.com");
+            }
+
+            else if (q.contains("hello") || q.contains("hi")) {
+
+                System.out.println("Hello Student! How can I help you?");
+            }
+
+            else if (q.contains("thank")) {
+
+                System.out.println("You are welcome!");
+            }
+
+            else if (q.contains("exit")) {
+
+                System.out.println("Thank You for Visiting");
+                break;
+            }
+
+            else {
+
+                System.out.println("Sorry, I don't understand");
+                System.out.println("Please ask related college questions");
+            }
+        }
+
+        sc.close();
+    }
+}
