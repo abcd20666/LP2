@@ -1,0 +1,308 @@
+📚 Library Management System in Salesforce Cloud
+(Mini Project – Complete Step-by-Step Guide)
+🟢 STEP 1: Login to Salesforce
+Open Salesforce
+Login with your account
+Click ⚙️ Setup
+🟢 STEP 2: Create Custom Objects
+
+We will create 3 objects:
+
+Book
+Member
+Book Issue
+📘 2.1 Create BOOK Object
+
+Go to:
+
+Setup → Object Manager → Create → Custom Object
+
+Fill:
+
+Field	Value
+Label	Book
+Object Name	Book
+Record Name	Book Name
+
+✔ Enable Reports
+✔ Save
+
+👤 2.2 Create MEMBER Object
+
+Create another object:
+
+Field	Value
+Label	Member
+Object Name	Member
+Record Name	Member Name
+
+✔ Enable Reports
+✔ Save
+
+📄 2.3 Create BOOK ISSUE Object
+
+Create third object:
+
+Field	Value
+Label	Book Issue
+Object Name	Book_Issue
+Record Name	Issue Name
+
+✔ Enable Reports
+✔ Save
+
+🟢 STEP 3: Create Fields in BOOK Object
+
+Go to:
+
+Book → Fields & Relationships → New
+
+Add fields:
+
+Field Name	Type
+Book Title	Text
+Author	Text
+Category	Picklist
+Available Copies	Number
+📌 Category Picklist Values
+Science
+Fiction
+History
+Technology
+🟢 STEP 4: Create Fields in MEMBER Object
+
+Go to:
+
+Member → Fields & Relationships → New
+
+Add:
+
+Field Name	Type
+Member ID	Text
+Department	Text/Picklist
+Email	Email
+Phone	Phone
+🟢 STEP 5: Create Fields in BOOK ISSUE Object
+
+Go to:
+
+Book Issue → Fields & Relationships → New
+
+Add:
+
+Field Name	Type
+Issue Date	Date
+Due Date	Date
+Return Date	Date
+Status	Picklist
+📌 Status Picklist Values
+Issued
+Returned
+🟢 STEP 6: Create Relationships (VERY IMPORTANT)
+
+In Book Issue Object create:
+
+🔗 Relationship 1
+Setting	Value
+Field Type	Master-Detail Relationship
+Related Object	Book
+
+✔ Save
+
+🔗 Relationship 2
+Setting	Value
+Field Type	Master-Detail Relationship
+Related Object	Member
+
+✔ Save
+
+🟢 STEP 7: Add Fine Calculation
+📌 Create Fine Formula Field
+
+Go to:
+
+Book Issue → Fields & Relationships → New
+
+Choose:
+
+Formula
+Fill Details
+Field	Value
+Label	Fine Calculation
+Return Type	Currency
+Paste Formula
+IF(
+   Return_Date__c > Due_Date__c,
+   (Return_Date__c - Due_Date__c) * 10,
+   0
+)
+Meaning
+₹10 fine per late day
+If returned late → fine calculated automatically
+Otherwise → 0
+
+✔ Save
+
+🟢 STEP 8: Create Lightning App
+
+Go to:
+
+Setup → App Manager → New Lightning App
+
+App Name:
+
+Library Management App
+Add Navigation Items
+
+Add:
+
+Book
+Member
+Book Issue
+Reports
+Dashboards
+
+✔ Finish
+
+🟢 STEP 9: Add Book Records
+Open App Launcher
+Open:
+Library Management App
+Open:
+Book
+Click:
+New
+
+Example:
+
+Field	Value
+Book Title	Java Basics
+Author	James
+Category	Technology
+Available Copies	5
+
+✔ Save
+
+🟢 STEP 10: Add Member Records
+
+Go to:
+
+Member → New
+
+Example:
+
+Field	Value
+Member Name	Tanuja
+Member ID	M101
+Department	IT
+Email	test@gmail.com
+
+✔ Save
+
+🟢 STEP 11: Issue a Book
+
+Go to:
+
+Book Issue → New
+
+Fill:
+
+Field	Value
+Issue Name	Issue1
+Book	Java Basics
+Member	Tanuja
+Issue Date	1 May
+Due Date	10 May
+Return Date	15 May
+Status	Returned
+
+✔ Save
+
+🎯 Fine Output
+
+Late by:
+
+15 - 10 = 5 days
+
+Fine:
+
+5 × 10 = ₹50
+
+✔ Automatically calculated
+
+🟢 STEP 12: Create Report Type
+
+Go to:
+
+Setup → Report Types
+
+Click:
+
+New Custom Report Type
+
+Fill:
+
+Field	Value
+Primary Object	Book Issue
+Report Type Label	Book Issue Report
+Category	Other Reports
+Status	Deployed
+
+✔ Save
+
+🟢 STEP 13: Create Report
+
+Go to:
+
+Reports → New Report
+
+Search:
+
+Book Issue Report
+
+Click:
+
+Start Report
+Add Columns
+Book
+Member
+Issue Date
+Due Date
+Return Date
+Fine Calculation
+Status
+Save Report
+
+Name:
+
+Library Report
+
+✔ Save & Run
+
+🟢 STEP 14: Create Dashboard (Optional)
+
+Go to:
+
+Dashboards → New Dashboard
+
+Name:
+
+Library Dashboard
+Add Components
+📊 Pie Chart
+Issued vs Returned Books
+📊 Bar Chart
+Books by Category
+📋 Table
+Member List
+
+✔ Save
+
+🎯 FINAL FEATURES
+
+✔ Book Management
+✔ Member Management
+✔ Issue & Return System
+✔ Fine Calculation
+✔ Reports
+✔ Dashboard
