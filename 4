@@ -1,0 +1,108 @@
+import java.util.*;
+
+class NQueen {
+
+    static int board[][];
+    static int n;
+    static int solution = 1;
+
+    // Check if queen can be placed
+    static boolean isSafe(int row, int col) {
+
+        // Check column
+        for (int i = 0; i < row; i++) {
+
+            if (board[i][col] == 1)
+                return false;
+        }
+
+        // Check left diagonal
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+
+            if (board[i][j] == 1)
+                return false;
+        }
+
+        // Check right diagonal
+        for (int i = row, j = col; i >= 0 && j < n; i--, j++) {
+
+            if (board[i][j] == 1)
+                return false;
+        }
+
+        return true;
+    }
+
+    // Backtracking function
+    static void solve(int row) {
+
+        // All queens placed
+        if (row == n) {
+
+            System.out.println("\nSolution " + solution++ + ":");
+
+            for (int i = 0; i < n; i++) {
+
+                for (int j = 0; j < n; j++) {
+
+                    if (board[i][j] == 1)
+                        System.out.print(" Q ");
+                    else
+                        System.out.print(" _ ");
+                }
+
+                System.out.println();
+            }
+
+            return;
+        }
+
+        // Try placing queen in every column
+        for (int col = 0; col < n; col++) {
+
+            if (isSafe(row, col)) {
+
+                board[row][col] = 1;
+
+                solve(row + 1);
+
+                // Backtrack
+                board[row][col] = 0;
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter value of N:");
+
+        n = sc.nextInt();
+
+        board = new int[n][n];
+
+        solve(0);
+
+        sc.close();
+    }
+}
+
+
+Enter value of N:
+4
+
+Solution 1:
+
+ _  Q  _  _
+ _  _  _  Q
+ Q  _  _  _
+ _  _  Q  _
+
+Solution 2:
+
+ _  _  Q  _
+ Q  _  _  _
+ _  _  _  Q
+ _  Q  _  _
+
